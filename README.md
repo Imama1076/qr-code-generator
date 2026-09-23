@@ -7,7 +7,7 @@ A lightweight and responsive web application to generate instant QR codes from U
 ## Preview
 
 <p align="center">
-  <img src="Qr%20code%20gen/preview.png" alt="QR Code Generator Preview" width="550">
+  <img src="Qr%20code%20gen/preview.JPG" alt="QR Code Generator Preview" width="550">
 </p>
 
 ---
