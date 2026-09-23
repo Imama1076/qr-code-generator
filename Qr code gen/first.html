@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+body{
+    background-color: rgb(24, 24, 48);
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.container{
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    background-color: white;
+    height: 500px;
+    width: 488px;
+    border-radius: 5%;
+}
+.main_container{
+    margin-left: 15%;
+    margin-top:10% ;
+}
+.qr{
+    margin-bottom:8% ;
+}
+.img-display{
+    max-height: 0;
+  width: 135px;
+transition:max-height linear 1s;
+}
+.show{
+    overflow: hidden;
+    cursor: pointer;
+    max-height: 150px;
+    margin-left: 100px;
+       
+}
+.generate_qr{
+    background-color: rgb(10, 89, 141);
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    height: 60px;
+    width: 341px;
+    box-shadow: 4px 4px 2px rgb(10, 89, 141);
+    border: none;
+}
+#input_text{
+    height: 40px;
+    width: 341px;
+    font-size: 15;
+    box-shadow: -2px 1px 3px rgb(81, 80, 80);
+    outline: 0;
+    border: none;
+}
+.error{
+    animation: shake 1s 2;
+    border: 2px solid rgb(98, 7, 7);
+}
+@keyframes shake{
+    0%{translate: 2px;
+    border: 2px solid rgb(213, 5, 5);}
+    25%{translate: 0px;
+    border: 2px solid  rgb(213, 5, 5)}
+    75%{translate: -2px;
+    border: 2px solid  rgb(213, 5, 5)}
+    100%{translate: 0px;
+    border: none}
+}
+    </style>
+</head>
+<body>
+ <div class="container">
+    <div class="main_container ">
+        <div class="text " style="padding-bottom:20px ; font-weight: bold;">Enter URL or Text to Generate QR Code</div>
+        <input type="text"  id="input_text" placeholder="Text or URL"class="qr">
+        <div class="display_qr qr">
+            <img src="" class="img-display" >
+        </div>
+        <button class="generate_qr qr" onclick="generateQr()">Generate QR Code</button>
+    </div>
+ </div>
+</body>
+<script>
+    let input_text=document.querySelector("#input_text");
+    let qr_display=document.querySelector(".display_qr");
+  let img_display=document.querySelector(".img-display")
+    function generateQr(){
+    let input_val=input_text.value.trim();
+    let unique=Date.now();
+        if(input_val!=="") {img_display.src=` https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(input_val)}&t=${unique}`;
+       img_display.classList.add("show");
+    }
+    else{
+         input_text.classList.add("error");
+    }
+     
+    }
+input_text.addEventListener("keydown",(e)=>{if(e.key=='Enter'){
+    generateQr();
+}});
+input_text.addEventListener("input",()=>{
+    input_text.classList.remove("error");
+})
+
+</script>
+</html>
